@@ -9,7 +9,6 @@
   <IconUrl DefaultValue="https://localhost:3000/assets/icon2.png"/>
   <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon2.png"/>
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
-  <Permissions>Send</Permissions>
   <AppDomains>
     <AppDomain>https://www.contoso.com</AppDomain>
   </AppDomains>

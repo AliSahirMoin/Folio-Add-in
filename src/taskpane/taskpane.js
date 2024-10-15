@@ -10,7 +10,7 @@ Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
     document.getElementById("sideload-msg").style.display = "none";
     document.getElementById("app-body").style.display = "flex";
-    document.getElementById("run").onclick = run;
+    document.getElementById("run").onclick = run; // Attach the updated run function to the "run" button
   }
 });
 
@@ -65,6 +65,26 @@ ${body}
 
                       // Download the file with the dynamic name
                       downloadEmail(emailContent, fileName);
+
+                      // Save the email
+                      item.saveAsync((saveResult) => {
+                        if (saveResult.status === Office.AsyncResultStatus.Succeeded) {
+                          console.log("Email saved successfully.");
+                          // Now send the email
+                          item.sendAsync((sendResult) => {
+                            if (sendResult.status === Office.AsyncResultStatus.Succeeded) {
+                              console.log("Email sent successfully.");
+                              alert("Email saved and sent successfully!");
+                            } else {
+                              console.error("Failed to send email:", sendResult.error.message);
+                              alert("Failed to send email");
+                            }
+                          });
+                        } else {
+                          console.error("Failed to save email:", saveResult.error.message);
+                          alert("Failed to save email");
+                        }
+                      });
                     } else {
                       console.error("Error retrieving body: " + bodyResult.error.message);
                     }
